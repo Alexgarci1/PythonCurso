@@ -63,7 +63,7 @@ Al empezar, todos los tests fallan. Es lo esperado: tu trabajo es ponerlos en ve
 | Módulo | Título | Horas |
 | --- | --- | --- |
 | 1 | [Introducción a Python](modulo_01_introduccion/README.md) | 4 |
-| 2 | Variables, operadores y estructuras de control | 8 |
+| 2 | [Variables, operadores y estructuras de control](modulo_02_variables_control/README.md) | 8 |
 | 3 | Funciones y módulos | 6 |
 | 4 | Colecciones y manejo de datos | 8 |
 | 5 | Programación Orientada a Objetos | 8 |

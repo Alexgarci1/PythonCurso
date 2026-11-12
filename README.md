@@ -66,6 +66,6 @@ Al empezar, todos los tests fallan. Es lo esperado: tu trabajo es ponerlos en ve
 | 2 | [Variables, operadores y estructuras de control](modulo_02_variables_control/README.md) | 8 |
 | 3 | [Funciones y módulos](modulo_03_funciones_modulos/README.md) | 6 |
 | 4 | [Colecciones y manejo de datos](modulo_04_colecciones/README.md) | 8 |
-| 5 | Programación Orientada a Objetos | 8 |
+| 5 | [Programación Orientada a Objetos](modulo_05_poo/README.md) | 8 |
 | 6 | Archivos y gestión de excepciones | 4 |
 | 7 | Proyecto práctico y evaluación | 4 |

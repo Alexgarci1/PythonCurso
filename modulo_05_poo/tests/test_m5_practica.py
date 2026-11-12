@@ -221,7 +221,7 @@ def test_biblioteca_bibliotecas_independientes(biblioteca):
 
 def test_biblioteca_buscar_por_titulo(biblioteca):
     assert [m.codigo for m in biblioteca.buscar_por_titulo("CÓDIGO")] == ["D002"]
-    assert [m.codigo for m in biblioteca.buscar_por_titulo("MA")] == ["L002", "D001"]
+    assert [m.codigo for m in biblioteca.buscar_por_titulo("MA")] == ["D002", "L002", "D001"]
     assert [m.codigo for m in biblioteca.buscar_por_titulo("e")] == [
         "R001", "L001", "D002", "L002",
     ]

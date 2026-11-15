@@ -349,6 +349,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <li><a href="#11-que-es-python-y-donde-se-usa">1.1 Qué es Python y dónde se usa</a><ul>
 <li><a href="#caracteristicas-que-te-van-a-llamar-la-atencion">Características que te van a llamar la atención</a></li>
 <li><a href="#donde-se-usa">Dónde se usa</a></li>
+<li><a href="#dos-formas-de-trabajar-con-python">Dos formas de trabajar con Python</a></li>
+<li><a href="#el-mapa-de-librerias">El mapa de librerías</a></li>
 <li><a href="#python-2-y-python-3">Python 2 y Python 3</a></li>
 <li><a href="#la-filosofia-del-lenguaje">La filosofía del lenguaje</a></li>
 </ul>
@@ -361,6 +363,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </li>
 <li><a href="#13-entorno-de-desarrollo">1.3 Entorno de desarrollo</a><ul>
 <li><a href="#el-interprete-interactivo-repl">El intérprete interactivo (REPL)</a></li>
+<li><a href="#cuadernos-jupyter">Cuadernos Jupyter</a></li>
 <li><a href="#ejecutar-un-script">Ejecutar un script</a></li>
 <li><a href="#entornos-virtuales">Entornos virtuales</a></li>
 <li><a href="#instalar-paquetes-con-pip">Instalar paquetes con pip</a></li>
@@ -483,6 +486,97 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <li><strong>Inteligencia artificial:</strong> es el lenguaje de referencia para machine learning, IA generativa y agentes. Los siguientes cursos del itinerario se apoyan en lo que aprendas aquí.</li>
 <li><strong>Testing y DevOps:</strong> pytest, Ansible, scripts de despliegue.</li>
 </ul>
+<h3 id="dos-formas-de-trabajar-con-python">Dos formas de trabajar con Python</h3>
+<p>En una consultora te vas a encontrar Python en dos papeles, y este curso cubre los dos:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th></th>
+<th>Python para aplicaciones</th>
+<th>Python para ciencia de datos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qué se construye</td>
+<td>Servicios, API, automatizaciones, herramientas de consola</td>
+<td>Análisis, informes, cuadros de mando, modelos</td>
+</tr>
+<tr>
+<td>Cómo se trabaja</td>
+<td>Proyecto con paquetes, tests y control de versiones</td>
+<td>Exploración interactiva en cuadernos y, después, código probado</td>
+</tr>
+<tr>
+<td>Estructura central</td>
+<td>Clases, funciones y colecciones</td>
+<td>Tablas y arrays: se opera con la columna entera</td>
+</tr>
+<tr>
+<td>Librerías</td>
+<td>Librería estándar, FastAPI, Django, SQLAlchemy, pytest</td>
+<td>NumPy, pandas, Matplotlib, Jupyter, scikit-learn</td>
+</tr>
+<tr>
+<td>En este curso</td>
+<td>Módulos 2 a 6 y la aplicación del Módulo 8</td>
+<td>Módulo 7 y el análisis del Módulo 8</td>
+</tr>
+</tbody>
+</table></div>
+<p>No son dos lenguajes ni dos perfiles separados: el análisis que funciona en un cuaderno acaba convertido en funciones, módulos y tests, y las aplicaciones acaban cargando y resumiendo datos. Los módulos 2 a 6 incluyen un apartado «Mirada de datos» que conecta cada tema con el trabajo con datos.</p>
+<h3 id="el-mapa-de-librerias">El mapa de librerías</h3>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Necesidad</th>
+<th>Librería</th>
+<th>Dónde se ve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ficheros, fechas, JSON, CSV, expresiones regulares</td>
+<td>Librería estándar</td>
+<td>Módulos 3 y 6</td>
+</tr>
+<tr>
+<td>Tests</td>
+<td>pytest</td>
+<td>Todo el curso</td>
+</tr>
+<tr>
+<td>Cálculo numérico con arrays</td>
+<td>NumPy</td>
+<td>Módulo 7</td>
+</tr>
+<tr>
+<td>Tablas: cargar, limpiar, agrupar y combinar</td>
+<td>pandas</td>
+<td>Módulos 7 y 8</td>
+</tr>
+<tr>
+<td>Gráficos</td>
+<td>Matplotlib</td>
+<td>Módulo 7</td>
+</tr>
+<tr>
+<td>Cuadernos interactivos</td>
+<td>Jupyter</td>
+<td>Módulo 7</td>
+</tr>
+<tr>
+<td>Modelos de machine learning</td>
+<td>scikit-learn</td>
+<td>Curso siguiente</td>
+</tr>
+<tr>
+<td>API web</td>
+<td>FastAPI</td>
+<td>Fuera del curso</td>
+</tr>
+</tbody>
+</table></div>
 <h3 id="python-2-y-python-3">Python 2 y Python 3</h3>
 <p>Python 2 dejó de tener soporte en 2020. Todo el curso usa Python 3.12 o superior. Si encuentras por internet código con <code>print "hola"</code> sin paréntesis, es Python 2: no lo copies.</p>
 <h3 id="la-filosofia-del-lenguaje">La filosofía del lenguaje</h3>
@@ -550,6 +644,31 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </tbody>
 </table></div>
 <p>Sales del intérprete con <code>exit()</code> o con <code>Ctrl+Z</code> y Enter en Windows (<code>Ctrl+D</code> en macOS y Linux).</p>
+<h3 id="cuadernos-jupyter">Cuadernos Jupyter</h3>
+<p>Hay una tercera forma de ejecutar Python, a medio camino entre el REPL y el script: el cuaderno. Es un fichero <code>.ipynb</code> dividido en celdas de código y de texto, en el que el resultado de cada celda queda guardado debajo de ella. Es la herramienta habitual para explorar datos, y VS Code los abre directamente.</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>Úsala para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REPL</td>
+<td>Probar una expresión o consultar <code>help</code> en diez segundos</td>
+</tr>
+<tr>
+<td>Cuaderno</td>
+<td>Explorar datos paso a paso, con tablas y gráficos a la vista</td>
+</tr>
+<tr>
+<td>Script y módulos <code>.py</code></td>
+<td>Todo lo que se va a reutilizar, probar o desplegar</td>
+</tr>
+</tbody>
+</table></div>
+<p>Durante los módulos 1 a 6 trabajamos con el REPL y con ficheros <code>.py</code>. Los cuadernos llegan en el Módulo 7.</p>
 <h3 id="ejecutar-un-script">Ejecutar un script</h3>
 <p>Un programa de Python es un fichero de texto con extensión <code>.py</code>. Se ejecuta pasándoselo al intérprete:</p>
 <div class="codehilite"><pre><span></span><code>python<span class="w"> </span>ejemplos/01_hola_mundo.py

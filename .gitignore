@@ -4,3 +4,6 @@ __pycache__/
 *.pyc
 .vscode/
 salida_practica_6/
+salida_practica_7/
+graficos_ejemplo/
+.ipynb_checkpoints/

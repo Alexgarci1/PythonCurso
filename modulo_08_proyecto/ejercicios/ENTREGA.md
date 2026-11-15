@@ -7,13 +7,13 @@ Completa este fichero antes de hacer el último commit.
 
 ## Estado
 
-- Tests superados: ___ de 99
-- Hitos terminados (1 a 5):
+- Tests superados: ___ de 114
+- Hitos terminados (1 a 6):
 - ¿La aplicación arranca y guarda los datos al salir?
 
 ## Decisiones de diseño
 
-Explica en dos o tres líneas cómo has organizado el menú y por qué.
+Explica en dos o tres líneas cómo has organizado el menú y por qué. Si has hecho el análisis, indica qué operación de pandas te ha resultado más útil.
 
 ## Ampliaciones
 

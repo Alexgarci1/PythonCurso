@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Módulo 5. Programación Orientada a Objetos (8 horas)</title>
+<title>Módulo 5. Programación Orientada a Objetos (6 horas)</title>
 <style>
 :root {
   --fondo: #fbfaf7; --panel: #ffffff; --texto: #1f2328; --suave: #5b6470;
@@ -394,13 +394,18 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <li><a href="#material-del-modulo">Material del módulo</a></li>
 </ul>
 </li>
+<li><a href="#mirada-de-datos">Mirada de datos</a><ul>
+<li><a href="#objetos-para-las-reglas-tablas-para-el-analisis">Objetos para las reglas, tablas para el análisis</a></li>
+<li><a href="#la-sintaxis-de-pandas-no-es-magia">La sintaxis de pandas no es magia</a></li>
+</ul>
+</li>
 <li><a href="#errores-tipicos-de-quien-viene-de-otro-lenguaje">Errores típicos de quien viene de otro lenguaje</a></li>
 <li><a href="#para-saber-mas">Para saber más</a></li>
 </ul>
 </div>
 </aside>
 <main>
-<h1 id="modulo-5-programacion-orientada-a-objetos-8-horas">Módulo 5. Programación Orientada a Objetos (8 horas)</h1>
+<h1 id="modulo-5-programacion-orientada-a-objetos-6-horas">Módulo 5. Programación Orientada a Objetos (6 horas)</h1>
 <p>Al terminar este módulo sabrás modelar un dominio con clases de Python y aplicar las convenciones del lenguaje, que en varios puntos son distintas de las de Java y C#.</p>
 <div class="tabla"><table>
 <thead>
@@ -414,7 +419,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <tr>
 <td>5.1</td>
 <td>Clases y objetos</td>
-<td>1 h</td>
+<td>0,5 h</td>
 </tr>
 <tr>
 <td>5.2</td>
@@ -424,22 +429,22 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <tr>
 <td>5.3</td>
 <td>Atributos y métodos</td>
-<td>1,5 h</td>
+<td>1 h</td>
 </tr>
 <tr>
 <td>5.4</td>
 <td>Herencia</td>
-<td>1,5 h</td>
+<td>1 h</td>
 </tr>
 <tr>
 <td>5.5</td>
 <td>Polimorfismo y duck typing</td>
-<td>1 h</td>
+<td>0,75 h</td>
 </tr>
 <tr>
 <td>5.6</td>
 <td>Encapsulación</td>
-<td>1 h</td>
+<td>0,75 h</td>
 </tr>
 <tr>
 <td>5.7</td>
@@ -1193,12 +1198,76 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <td><code>06_dataclasses_y_composicion.py</code></td>
 <td><code>@dataclass</code>, <code>field</code>, <code>frozen</code> y composición</td>
 </tr>
+<tr>
+<td><code>07_mirada_datos.py</code></td>
+<td>De objetos a filas con <code>asdict</code>, y una tabla mínima con métodos especiales</td>
+</tr>
 </tbody>
 </table></div>
 <ul>
 <li>Ejercicios del módulo: <a href="modulo_05_ejercicios.html"><code>ejercicios/README.md</code></a></li>
 <li>Práctica 5, modelo de una biblioteca: <a href="modulo_05_practica.html"><code>ejercicios/PRACTICA_5.md</code></a></li>
 </ul>
+<hr />
+<h2 id="mirada-de-datos">Mirada de datos</h2>
+<h3 id="objetos-para-las-reglas-tablas-para-el-analisis">Objetos para las reglas, tablas para el análisis</h3>
+<p>Una clase garantiza que <strong>cada</strong> dato es válido y sabe comportarse: una <code>Venta</code> no puede tener unidades negativas y sabe calcular su importe. Una tabla responde preguntas sobre <strong>todos</strong> los datos a la vez: cuánto se vendió por región. Las aplicaciones reales usan las dos cosas, y el puente entre ellas es corto:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">asdict</span><span class="p">,</span> <span class="n">dataclass</span>
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Venta</span><span class="p">:</span>
+    <span class="n">region</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">unidades</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">precio</span><span class="p">:</span> <span class="nb">float</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">importe</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unidades</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">precio</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">ventas</span> <span class="o">=</span> <span class="p">[</span><span class="n">Venta</span><span class="p">(</span><span class="s2">"Norte"</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">19.9</span><span class="p">),</span> <span class="n">Venta</span><span class="p">(</span><span class="s2">"Sur"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">250.0</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">asdict</span><span class="p">(</span><span class="n">venta</span><span class="p">)</span> <span class="o">|</span> <span class="p">{</span><span class="s2">"importe"</span><span class="p">:</span> <span class="n">venta</span><span class="o">.</span><span class="n">importe</span><span class="p">}</span> <span class="k">for</span> <span class="n">venta</span> <span class="ow">in</span> <span class="n">ventas</span><span class="p">]</span>
+<span class="p">[{</span><span class="s1">'region'</span><span class="p">:</span> <span class="s1">'Norte'</span><span class="p">,</span> <span class="s1">'unidades'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'precio'</span><span class="p">:</span> <span class="mf">19.9</span><span class="p">,</span> <span class="s1">'importe'</span><span class="p">:</span> <span class="mf">59.7</span><span class="p">},</span> <span class="p">{</span><span class="s1">'region'</span><span class="p">:</span> <span class="s1">'Sur'</span><span class="p">,</span> <span class="s1">'unidades'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'precio'</span><span class="p">:</span> <span class="mf">250.0</span><span class="p">,</span> <span class="s1">'importe'</span><span class="p">:</span> <span class="mf">250.0</span><span class="p">}]</span>
+</code></pre></div>
+
+<p>Esa lista de diccionarios es justo lo que acepta <code>pd.DataFrame(...)</code>. En el proyecto del Módulo 8 harás este recorrido completo: objetos <code>Incidencia</code> con sus reglas y un módulo de análisis que los convierte en tabla.</p>
+<h3 id="la-sintaxis-de-pandas-no-es-magia">La sintaxis de pandas no es magia</h3>
+<p>Cuando en el Módulo 7 escribas <code>len(tabla)</code>, <code>tabla["importe"]</code>, <code>tabla.shape</code> o <code>tabla_a + tabla_b</code>, estarás usando lo que has aprendido aquí:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Lo que escribes</th>
+<th>Lo que hay detrás</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>len(tabla)</code></td>
+<td><code>__len__</code></td>
+</tr>
+<tr>
+<td><code>tabla["importe"]</code></td>
+<td><code>__getitem__</code></td>
+</tr>
+<tr>
+<td><code>tabla.shape</code>, <code>tabla.columns</code></td>
+<td>Propiedades</td>
+</tr>
+<tr>
+<td><code>serie * 1.21</code>, <code>serie &gt; 100</code></td>
+<td><code>__mul__</code>, <code>__gt__</code></td>
+</tr>
+<tr>
+<td><code>tabla</code> en el intérprete</td>
+<td><code>__repr__</code></td>
+</tr>
+<tr>
+<td><code>pd.DataFrame.from_records(...)</code></td>
+<td>Un <code>@classmethod</code> como constructor alternativo</td>
+</tr>
+</tbody>
+</table></div>
+<p>Un <code>DataFrame</code> es un objeto con atributos, métodos y métodos especiales. El ejemplo <code>ejemplos/07_mirada_datos.py</code> construye una tabla mínima con cuatro de ellos.</p>
 <hr />
 <h2 id="errores-tipicos-de-quien-viene-de-otro-lenguaje">Errores típicos de quien viene de otro lenguaje</h2>
 <div class="tabla"><table>

@@ -11,8 +11,8 @@
 <body class="alumnos">
 <div class="reveal">
 <div class="slides">
-<section class="especial inicio" id="portada" data-menu="Portada" data-transition="fade"><div class="portada"><div class="formas" aria-hidden="true"><i></i><i></i><i></i></div><p class="curso">Programación en Python · Nivel Inicial</p><p class="modulo">Módulo 6</p><h1>Archivos y gestión de excepciones</h1><div class="objetivo"><p>Al terminar este módulo sabrás guardar y recuperar datos en archivos de texto y CSV, y escribir código que falla de forma controlada: que detecta el error, informa de él y deja el programa en un estado correcto.</p> <p>Los archivos de ejemplo están en la carpeta <a href="https://github.com/yustech/Curso-Python-IA/blob/main/modulo_06_archivos_excepciones/datos/" target="_blank" rel="noopener"><code>datos/</code></a>.</p></div><div class="cifras"><div class="cifra"><b data-cuenta="4">4</b><span>horas</span></div><div class="cifra"><b data-cuenta="4">4</b><span>unidades</span></div><div class="cifra"><b data-cuenta="4">4</b><span>ficheros de trabajo</span></div></div><p class="navega">Avanza con <kbd>→</kbd> o <kbd>Espacio</kbd> · <kbd>M</kbd> índice · <kbd>Esc</kbd> vista general</p></div></section>
-<section class="agenda" id="agenda" data-menu="Contenido del módulo"><header class="cabecera"><p class="antetitulo">Módulo 6 · 4 horas</p><h2>Contenido del módulo</h2></header><div class="cuerpo"><div class="tarjetas n4"><a class="tarjeta" href="#/u6-1"><span class="n">6.1</span><span class="t">Lectura y escritura de archivos</span><span class="tiempo">1 h</span></a><a class="tarjeta" href="#/u6-2"><span class="n">6.2</span><span class="t">CSV</span><span class="tiempo">1 h</span></a><a class="tarjeta" href="#/u6-3"><span class="n">6.3</span><span class="t">Excepciones</span><span class="tiempo">1 h</span></a><a class="tarjeta" href="#/u6-4"><span class="n">6.4</span><span class="t">Depuración, logging y Práctica 6</span><span class="tiempo">1 h</span></a></div></div></section>
+<section class="especial inicio" id="portada" data-menu="Portada" data-transition="fade"><div class="portada"><div class="formas" aria-hidden="true"><i></i><i></i><i></i></div><p class="curso">Programación en Python · Nivel Inicial</p><p class="modulo">Módulo 6</p><h1>Archivos y gestión de excepciones</h1><div class="objetivo"><p>Al terminar este módulo sabrás guardar y recuperar datos en archivos de texto, CSV y JSON, y escribir código que falla de forma controlada: que detecta el error, informa de él y deja el programa en un estado correcto.</p> <p>Los archivos de ejemplo están en la carpeta <a href="https://github.com/yustech/Curso-Python-IA/blob/main/modulo_06_archivos_excepciones/datos/" target="_blank" rel="noopener"><code>datos/</code></a>.</p></div><div class="cifras"><div class="cifra"><b data-cuenta="3">3</b><span>horas</span></div><div class="cifra"><b data-cuenta="4">4</b><span>unidades</span></div><div class="cifra"><b data-cuenta="4">4</b><span>ficheros de trabajo</span></div></div><p class="navega">Avanza con <kbd>→</kbd> o <kbd>Espacio</kbd> · <kbd>M</kbd> índice · <kbd>Esc</kbd> vista general</p></div></section>
+<section class="agenda" id="agenda" data-menu="Contenido del módulo"><header class="cabecera"><p class="antetitulo">Módulo 6 · 3 horas</p><h2>Contenido del módulo</h2></header><div class="cuerpo"><div class="tarjetas n4"><a class="tarjeta" href="#/u6-1"><span class="n">6.1</span><span class="t">Lectura y escritura de archivos</span><span class="tiempo">0,75 h</span></a><a class="tarjeta" href="#/u6-2"><span class="n">6.2</span><span class="t">CSV</span><span class="tiempo">0,75 h</span></a><a class="tarjeta" href="#/u6-3"><span class="n">6.3</span><span class="t">Excepciones</span><span class="tiempo">0,75 h</span></a><a class="tarjeta" href="#/u6-4"><span class="n">6.4</span><span class="t">Depuración, logging y Práctica 6</span><span class="tiempo">0,75 h</span></a></div></div></section>
 <section class="especial seccion" id="u6-1" data-menu="6.1 Lectura y escritura de archivos" data-transition="fade"><div class="divisor"><span class="numero">6.1</span><h2>Lectura y escritura de archivos</h2><ul class="puntos"><li>Abrir con with</li><li>Modos</li><li>Codificación: siempre UTF-8, siempre explícita</li><li>Leer</li><li>Escribir</li><li>pathlib</li><li>Rutas relativas</li><li>JSON</li></ul></div></section>
 <section><header class="cabecera"><p class="antetitulo">6.1 Lectura y escritura de archivos</p><h2>Abrir con with</h2></header><div class="cuerpo"><div class="codigo"><div class="barra-codigo"><span class="lenguaje">python</span><button class="copiar" type="button" title="Copiar el código">Copiar</button></div><pre><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"notas.txt"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fichero</span><span class="p">:</span>
     <span class="n">contenido</span> <span class="o">=</span> <span class="n">fichero</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -417,7 +417,7 @@ KeyError: 'importe'</code></pre></div></div></div></div></section>
 <span class="k">except</span> <span class="n">FicheroNoValido</span><span class="p">:</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">"Fallo al importar </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">ruta</span><span class="p">)</span>
     <span class="k">raise</span></code></pre></div></div></section>
-<section><header class="cabecera"><p class="antetitulo">6.4 Depuración, logging y Práctica 6</p><h2>Material del módulo</h2></header><div class="cuerpo"><div class="tabla"><table>
+<section><header class="cabecera"><p class="antetitulo">6.4 Depuración, logging y Práctica 6</p><h2>Material del módulo <span class="parte">1/2</span></h2></header><div class="cuerpo"><div class="tabla"><table>
 <thead>
 <tr>
 <th>Fichero de <a href="https://github.com/yustech/Curso-Python-IA/blob/main/modulo_06_archivos_excepciones/ejemplos/" target="_blank" rel="noopener"><code>ejemplos/</code></a></th>
@@ -449,11 +449,66 @@ KeyError: 'importe'</code></pre></div></div></div></div></section>
 <td><code>06_para_depurar.py</code></td>
 <td>Un programa con tres errores para practicar con el depurador</td>
 </tr>
+<tr>
+<td><code>07_mirada_datos.py</code></td>
+<td>Cargar un CSV con filas incorrectas sin detener la carga y dejar un resumen en JSON</td>
+</tr>
 </tbody>
-</table></div><ul>
+</table></div></div></section>
+<section><header class="cabecera"><p class="antetitulo">6.4 Depuración, logging y Práctica 6</p><h2>Material del módulo <span class="parte">2/2</span></h2></header><div class="cuerpo"><ul>
 <li>Ejercicios del módulo: <a href="https://github.com/yustech/Curso-Python-IA/blob/main/modulo_06_archivos_excepciones/ejercicios/README.md" target="_blank" rel="noopener"><code>ejercicios/README.md</code></a></li>
 <li>Práctica 6, importador de CSV: <a href="https://github.com/yustech/Curso-Python-IA/blob/main/modulo_06_archivos_excepciones/ejercicios/PRACTICA_6.md" target="_blank" rel="noopener"><code>ejercicios/PRACTICA_6.md</code></a></li>
 </ul></div></section>
+<section data-menu="Mirada de datos"><header class="cabecera"><p class="antetitulo">Módulo 6</p><h2>Mirada de datos <span class="parte">1/3</span></h2></header><div class="cuerpo"><p>Cargar un fichero es el primer paso de cualquier análisis, y los problemas de este módulo son los mismos que encontrarás con pandas. Allí aparecen como parámetros de <code>pd.read_csv</code>:</p><div class="tabla"><table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Con el módulo <code>csv</code></th>
+<th>Con pandas (Módulo 7)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tildes rotas</td>
+<td><code>open(..., encoding="utf-8")</code></td>
+<td><code>pd.read_csv(ruta, encoding="utf-8")</code></td>
+</tr>
+<tr>
+<td>Separador punto y coma</td>
+<td><code>csv.reader(f, delimiter=";")</code></td>
+<td><code>sep=";"</code></td>
+</tr>
+<tr>
+<td>Coma decimal</td>
+<td><code>float(texto.replace(",", "."))</code></td>
+<td><code>decimal=","</code></td>
+</tr>
+<tr>
+<td>Todo llega como texto</td>
+<td>Conversión a mano, fila a fila</td>
+<td>Tipos inferidos por columna, y <code>dtype=</code> o <code>parse_dates=</code> para fijarlos</td>
+</tr>
+<tr>
+<td>Filas que no valen</td>
+<td><code>try</code>/<code>except</code> por fila</td>
+<td><code>pd.to_numeric(columna, errors="coerce")</code> y <code>dropna</code></td>
+</tr>
+</tbody>
+</table></div></div></section>
+<section><header class="cabecera"><p class="antetitulo">Módulo 6</p><h2>Mirada de datos <span class="parte">2/3</span></h2></header><div class="cuerpo"><p>La decisión importante no cambia de una herramienta a otra: <strong>qué se hace con una fila que no vale</strong>. Hay tres políticas, y hay que elegir una a propósito:</p><ol>
+<li><strong>Detener la carga.</strong> Para los datos propios de una aplicación, donde seguir con la mitad sería peor. Es lo que hará el almacén del proyecto final.</li>
+<li><strong>Apartar la fila y seguir, dejando constancia.</strong> Para datos que vienen de fuera. Es la Práctica 6.</li>
+<li><strong>Convertir el dato incorrecto en valor ausente.</strong> Lo habitual en análisis exploratorio, y lo que hace <code>errors="coerce"</code>.</li>
+</ol></div></section>
+<section><header class="cabecera"><p class="antetitulo">Módulo 6</p><h2>Mirada de datos <span class="parte">3/3</span></h2></header><div class="cuerpo"><p>El patrón de la segunda política, en pequeño:</p><div class="codigo"><div class="barra-codigo"><span class="lenguaje">python</span><button class="copiar" type="button" title="Copiar el código">Copiar</button></div><pre><code><span class="n">validas</span><span class="p">,</span> <span class="n">rechazos</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">numero</span><span class="p">,</span> <span class="n">fila</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fichero</span><span class="p">),</span> <span class="n">start</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">fila</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fila</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">])</span>
+        <span class="n">fila</span><span class="p">[</span><span class="s2">"precio"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">fila</span><span class="p">[</span><span class="s2">"precio"</span><span class="p">])</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="n">rechazos</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">numero</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)))</span>
+        <span class="k">continue</span>
+    <span class="n">validas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fila</span><span class="p">)</span></code></pre></div><p>Lo que nunca se hace es descartar filas en silencio: un análisis sobre el 90 % de los datos, sin saber que falta el 10 %, es un resultado falso. El ejemplo <code>ejemplos/07_mirada_datos.py</code> carga <code>datos/ventas_con_errores.csv</code>, informa de las dos filas rechazadas y deja un resumen del proceso en JSON.</p></div></section>
 <section data-menu="Errores típicos de quien viene de otro lenguaje"><header class="cabecera"><p class="antetitulo">Módulo 6</p><h2>Errores típicos de quien viene de otro lenguaje <span class="parte">1/2</span></h2></header><div class="cuerpo"><div class="tabla"><table>
 <thead>
 <tr>
@@ -853,7 +908,7 @@ Leídas 18 filas: 12 válidas y 6 descartadas. Resultados en salida_practica_6</
 <li>Añade a <code>main()</code> la opción <code>--log fichero</code> para enviar el registro a un fichero.</li>
 <li>Conecta el importador con la Práctica 4: después de importar, genera el informe con <code>generar_informe(ventas)</code>.</li>
 </ol></div></section>
-<section class="especial inicio" id="fin" data-menu="Fin del módulo" data-transition="fade"><div class="portada final"><div class="formas" aria-hidden="true"><i></i><i></i><i></i></div><p class="modulo">Fin del Módulo 6</p><h1>Archivos y gestión de excepciones</h1><div class="acciones"><a class="boton" href="modulo_07.html">Módulo 7. Proyecto práctico y evaluación <span aria-hidden="true">→</span></a><a class="boton secundario" href="index.html">Índice del curso</a><a class="boton secundario" href="#/agenda">Volver al contenido</a></div></div></section>
+<section class="especial inicio" id="fin" data-menu="Fin del módulo" data-transition="fade"><div class="portada final"><div class="formas" aria-hidden="true"><i></i><i></i><i></i></div><p class="modulo">Fin del Módulo 6</p><h1>Archivos y gestión de excepciones</h1><div class="acciones"><a class="boton" href="modulo_07.html">Módulo 7. Python para ciencia de datos <span aria-hidden="true">→</span></a><a class="boton secundario" href="index.html">Índice del curso</a><a class="boton secundario" href="#/agenda">Volver al contenido</a></div></div></section>
 </div>
 <div class="pie-curso"><a href="index.html" title="Índice del curso">Módulo 6. Archivos y gestión de excepciones</a><span class="donde"></span></div>
 <div class="herramientas">

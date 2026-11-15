@@ -39,6 +39,33 @@ Una aclaración técnica: Python sí compila, pero lo hace solo. El intérprete 
 - **Inteligencia artificial:** es el lenguaje de referencia para machine learning, IA generativa y agentes. Los siguientes cursos del itinerario se apoyan en lo que aprendas aquí.
 - **Testing y DevOps:** pytest, Ansible, scripts de despliegue.
 
+### Dos formas de trabajar con Python
+
+En una consultora te vas a encontrar Python en dos papeles, y este curso cubre los dos:
+
+| | Python para aplicaciones | Python para ciencia de datos |
+| --- | --- | --- |
+| Qué se construye | Servicios, API, automatizaciones, herramientas de consola | Análisis, informes, cuadros de mando, modelos |
+| Cómo se trabaja | Proyecto con paquetes, tests y control de versiones | Exploración interactiva en cuadernos y, después, código probado |
+| Estructura central | Clases, funciones y colecciones | Tablas y arrays: se opera con la columna entera |
+| Librerías | Librería estándar, FastAPI, Django, SQLAlchemy, pytest | NumPy, pandas, Matplotlib, Jupyter, scikit-learn |
+| En este curso | Módulos 2 a 6 y la aplicación del Módulo 8 | Módulo 7 y el análisis del Módulo 8 |
+
+No son dos lenguajes ni dos perfiles separados: el análisis que funciona en un cuaderno acaba convertido en funciones, módulos y tests, y las aplicaciones acaban cargando y resumiendo datos. Los módulos 2 a 6 incluyen un apartado «Mirada de datos» que conecta cada tema con el trabajo con datos.
+
+### El mapa de librerías
+
+| Necesidad | Librería | Dónde se ve |
+| --- | --- | --- |
+| Ficheros, fechas, JSON, CSV, expresiones regulares | Librería estándar | Módulos 3 y 6 |
+| Tests | pytest | Todo el curso |
+| Cálculo numérico con arrays | NumPy | Módulo 7 |
+| Tablas: cargar, limpiar, agrupar y combinar | pandas | Módulos 7 y 8 |
+| Gráficos | Matplotlib | Módulo 7 |
+| Cuadernos interactivos | Jupyter | Módulo 7 |
+| Modelos de machine learning | scikit-learn | Curso siguiente |
+| API web | FastAPI | Fuera del curso |
+
 ### Python 2 y Python 3
 
 Python 2 dejó de tener soporte en 2020. Todo el curso usa Python 3.12 o superior. Si encuentras por internet código con `print "hola"` sin paréntesis, es Python 2: no lo copies.
@@ -106,6 +133,18 @@ Tres funciones que conviene conocer desde el primer día:
 | `help(x)` | Muestra la documentación |
 
 Sales del intérprete con `exit()` o con `Ctrl+Z` y Enter en Windows (`Ctrl+D` en macOS y Linux).
+
+### Cuadernos Jupyter
+
+Hay una tercera forma de ejecutar Python, a medio camino entre el REPL y el script: el cuaderno. Es un fichero `.ipynb` dividido en celdas de código y de texto, en el que el resultado de cada celda queda guardado debajo de ella. Es la herramienta habitual para explorar datos, y VS Code los abre directamente.
+
+| Herramienta | Úsala para |
+| --- | --- |
+| REPL | Probar una expresión o consultar `help` en diez segundos |
+| Cuaderno | Explorar datos paso a paso, con tablas y gráficos a la vista |
+| Script y módulos `.py` | Todo lo que se va a reutilizar, probar o desplegar |
+
+Durante los módulos 1 a 6 trabajamos con el REPL y con ficheros `.py`. Los cuadernos llegan en el Módulo 7.
 
 ### Ejecutar un script
 

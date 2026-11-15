@@ -2,6 +2,8 @@
 
 Repositorio de trabajo del curso. Aquí están los apuntes, los ejemplos que se programan en clase, los ejercicios y las prácticas de cada módulo.
 
+El curso cubre las dos formas de trabajar con Python: como lenguaje para construir aplicaciones (módulos 2 a 6) y como lenguaje para ciencia de datos (módulo 7). El proyecto final reúne las dos.
+
 Los contenidos también están en HTML: abre [`docs/index.html`](docs/index.html) en el navegador.
 
 Y en forma de presentación interactiva, una diapositiva por pantalla: abre [`docs/presentacion/index.html`](docs/presentacion/index.html). Se avanza con las flechas o la barra espaciadora; `M` abre el índice, `Esc` la vista general y `F` la pantalla completa. En los ejemplos del intérprete los resultados están ocultos: intenta predecirlos y haz clic para comprobarlos.
@@ -29,6 +31,8 @@ Instala las dependencias:
 ```bash
 pip install -r requirements.txt
 ```
+
+El fichero instala `pytest`, que se usa desde el primer día, y `numpy`, `pandas`, `matplotlib` y `jupyter`, que se usan en los módulos 7 y 8. Para abrir los cuadernos `.ipynb` en VS Code necesitas además la extensión Jupyter.
 
 ## Estructura
 
@@ -65,9 +69,10 @@ Al empezar, todos los tests fallan. Es lo esperado: tu trabajo es ponerlos en ve
 | Módulo | Título | Horas |
 | --- | --- | --- |
 | 1 | [Introducción a Python](modulo_01_introduccion/README.md) | 4 |
-| 2 | [Variables, operadores y estructuras de control](modulo_02_variables_control/README.md) | 8 |
-| 3 | [Funciones y módulos](modulo_03_funciones_modulos/README.md) | 6 |
-| 4 | [Colecciones y manejo de datos](modulo_04_colecciones/README.md) | 8 |
-| 5 | [Programación Orientada a Objetos](modulo_05_poo/README.md) | 8 |
-| 6 | [Archivos y gestión de excepciones](modulo_06_archivos_excepciones/README.md) | 4 |
-| 7 | [Proyecto práctico y evaluación](modulo_07_proyecto/README.md) | 4 |
+| 2 | [Variables, operadores y estructuras de control](modulo_02_variables_control/README.md) | 6 |
+| 3 | [Funciones y módulos](modulo_03_funciones_modulos/README.md) | 5 |
+| 4 | [Colecciones y manejo de datos](modulo_04_colecciones/README.md) | 6 |
+| 5 | [Programación Orientada a Objetos](modulo_05_poo/README.md) | 6 |
+| 6 | [Archivos y gestión de excepciones](modulo_06_archivos_excepciones/README.md) | 3 |
+| 7 | [Python para ciencia de datos](modulo_07_ciencia_datos/README.md) | 8 |
+| 8 | [Proyecto práctico y evaluación](modulo_08_proyecto/README.md) | 4 |

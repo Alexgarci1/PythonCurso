@@ -1,13 +1,13 @@
-# Módulo 3. Funciones y módulos (6 horas)
+# Módulo 3. Funciones y módulos (5 horas)
 
 Al terminar este módulo sabrás organizar un programa en funciones y módulos reutilizables y documentados, y conocerás las partes de la librería estándar que más se usan a diario.
 
 | Unidad | Contenido | Tiempo |
 | --- | --- | --- |
-| 3.1 | Definición de funciones | 1 h |
-| 3.2 | Parámetros y retorno | 1,5 h |
-| 3.3 | Ámbito de variables | 1 h |
-| 3.4 | Módulos y paquetes | 1 h |
+| 3.1 | Definición de funciones | 0,75 h |
+| 3.2 | Parámetros y retorno | 1,25 h |
+| 3.3 | Ámbito de variables | 0,75 h |
+| 3.4 | Módulos y paquetes | 0,75 h |
 | 3.5 | Librerías estándar | 0,5 h |
 | 3.6 | Práctica 3 | 1 h |
 
@@ -651,9 +651,44 @@ Los ejemplos de la carpeta [`ejemplos/`](ejemplos/) recorren el módulo:
 | `03_ambito.py` | Regla LEGB, `global`, `nonlocal`, cierres y lambdas |
 | `04_usar_paquete.py` y `tienda/` | Un paquete con dos módulos y un programa que lo usa |
 | `05_libreria_estandar.py` | `math`, `random`, `datetime`, `pathlib` y `collections` |
+| `06_mirada_datos.py` | Funciones como argumentos para resumir una serie de valores, y `statistics` |
 
 - Ejercicios del módulo: [`ejercicios/README.md`](ejercicios/README.md)
 - Práctica 3, librería de validación: [`ejercicios/PRACTICA_3.md`](ejercicios/PRACTICA_3.md)
+
+---
+
+## Mirada de datos
+
+En el trabajo con datos, las funciones se usan sobre todo de una manera: **como argumento de otra función**, para decirle qué cálculo aplicar. Ya lo has hecho con `sorted(..., key=...)`. Este resumen recibe los valores y cualquier número de funciones:
+
+```python
+import statistics
+
+def rango(valores):
+    return max(valores) - min(valores)
+
+def resumen(valores, *funciones):
+    resultado = {}
+    for funcion in funciones:
+        resultado[funcion.__name__] = round(funcion(valores), 2)
+    return resultado
+```
+
+```python
+>>> importes = [120.0, 80.5, 310.0, 95.0, 150.25]
+>>> resumen(importes, min, max, statistics.mean, statistics.median, rango)
+{'min': 80.5, 'max': 310.0, 'mean': 151.15, 'median': 120.0, 'rango': 229.5}
+```
+
+Funciones integradas, de la librería estándar y propias se tratan igual, porque todas son objetos con un atributo `__name__`. En el Módulo 7 verás exactamente esta forma de trabajar: `ventas["importe"].agg(["min", "max", "mean"])` y `tabla.apply(mi_funcion)`.
+
+Dos cosas más de este módulo que usarás a diario con datos:
+
+- **`statistics`**, de la librería estándar: `mean`, `median`, `stdev` y `quantiles` para series pequeñas sin instalar nada.
+- **Los argumentos por nombre.** Las funciones de las librerías de datos tienen decenas de parámetros opcionales: `pd.read_csv(ruta, sep=";", decimal=",", encoding="utf-8")`. Se leen y se escriben siempre por nombre.
+
+El ejemplo completo está en `ejemplos/06_mirada_datos.py`.
 
 ---
 

@@ -1,13 +1,13 @@
-# Módulo 6. Archivos y gestión de excepciones (4 horas)
+# Módulo 6. Archivos y gestión de excepciones (3 horas)
 
-Al terminar este módulo sabrás guardar y recuperar datos en archivos de texto y CSV, y escribir código que falla de forma controlada: que detecta el error, informa de él y deja el programa en un estado correcto.
+Al terminar este módulo sabrás guardar y recuperar datos en archivos de texto, CSV y JSON, y escribir código que falla de forma controlada: que detecta el error, informa de él y deja el programa en un estado correcto.
 
 | Unidad | Contenido | Tiempo |
 | --- | --- | --- |
-| 6.1 | Lectura y escritura de archivos | 1 h |
-| 6.2 | CSV | 1 h |
-| 6.3 | Excepciones | 1 h |
-| 6.4 | Depuración, logging y Práctica 6 | 1 h |
+| 6.1 | Lectura y escritura de archivos | 0,75 h |
+| 6.2 | CSV | 0,75 h |
+| 6.3 | Excepciones | 0,75 h |
+| 6.4 | Depuración, logging y Práctica 6 | 0,75 h |
 
 Los archivos de ejemplo están en la carpeta [`datos/`](datos/).
 
@@ -541,9 +541,46 @@ except FicheroNoValido:
 | `04_excepciones_propias.py` | `raise`, jerarquía propia y `raise ... from` |
 | `05_logging.py` | Niveles, formato, registro en fichero y `logger.exception` |
 | `06_para_depurar.py` | Un programa con tres errores para practicar con el depurador |
+| `07_mirada_datos.py` | Cargar un CSV con filas incorrectas sin detener la carga y dejar un resumen en JSON |
 
 - Ejercicios del módulo: [`ejercicios/README.md`](ejercicios/README.md)
 - Práctica 6, importador de CSV: [`ejercicios/PRACTICA_6.md`](ejercicios/PRACTICA_6.md)
+
+---
+
+## Mirada de datos
+
+Cargar un fichero es el primer paso de cualquier análisis, y los problemas de este módulo son los mismos que encontrarás con pandas. Allí aparecen como parámetros de `pd.read_csv`:
+
+| Problema | Con el módulo `csv` | Con pandas (Módulo 7) |
+| --- | --- | --- |
+| Tildes rotas | `open(..., encoding="utf-8")` | `pd.read_csv(ruta, encoding="utf-8")` |
+| Separador punto y coma | `csv.reader(f, delimiter=";")` | `sep=";"` |
+| Coma decimal | `float(texto.replace(",", "."))` | `decimal=","` |
+| Todo llega como texto | Conversión a mano, fila a fila | Tipos inferidos por columna, y `dtype=` o `parse_dates=` para fijarlos |
+| Filas que no valen | `try`/`except` por fila | `pd.to_numeric(columna, errors="coerce")` y `dropna` |
+
+La decisión importante no cambia de una herramienta a otra: **qué se hace con una fila que no vale**. Hay tres políticas, y hay que elegir una a propósito:
+
+1. **Detener la carga.** Para los datos propios de una aplicación, donde seguir con la mitad sería peor. Es lo que hará el almacén del proyecto final.
+2. **Apartar la fila y seguir, dejando constancia.** Para datos que vienen de fuera. Es la Práctica 6.
+3. **Convertir el dato incorrecto en valor ausente.** Lo habitual en análisis exploratorio, y lo que hace `errors="coerce"`.
+
+El patrón de la segunda política, en pequeño:
+
+```python
+validas, rechazos = [], []
+for numero, fila in enumerate(csv.DictReader(fichero), start=2):
+    try:
+        fila["unidades"] = int(fila["unidades"])
+        fila["precio"] = float(fila["precio"])
+    except ValueError as error:
+        rechazos.append((numero, str(error)))
+        continue
+    validas.append(fila)
+```
+
+Lo que nunca se hace es descartar filas en silencio: un análisis sobre el 90 % de los datos, sin saber que falta el 10 %, es un resultado falso. El ejemplo `ejemplos/07_mirada_datos.py` carga `datos/ventas_con_errores.csv`, informa de las dos filas rechazadas y deja un resumen del proceso en JSON.
 
 ---
 

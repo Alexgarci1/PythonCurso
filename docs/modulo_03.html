@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Módulo 3. Funciones y módulos (6 horas)</title>
+<title>Módulo 3. Funciones y módulos (5 horas)</title>
 <style>
 :root {
   --fondo: #fbfaf7; --panel: #ffffff; --texto: #1f2328; --suave: #5b6470;
@@ -393,13 +393,14 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </ul>
 </li>
 <li><a href="#36-practica-3">3.6 Práctica 3</a></li>
+<li><a href="#mirada-de-datos">Mirada de datos</a></li>
 <li><a href="#errores-tipicos-de-quien-viene-de-otro-lenguaje">Errores típicos de quien viene de otro lenguaje</a></li>
 <li><a href="#para-saber-mas">Para saber más</a></li>
 </ul>
 </div>
 </aside>
 <main>
-<h1 id="modulo-3-funciones-y-modulos-6-horas">Módulo 3. Funciones y módulos (6 horas)</h1>
+<h1 id="modulo-3-funciones-y-modulos-5-horas">Módulo 3. Funciones y módulos (5 horas)</h1>
 <p>Al terminar este módulo sabrás organizar un programa en funciones y módulos reutilizables y documentados, y conocerás las partes de la librería estándar que más se usan a diario.</p>
 <div class="tabla"><table>
 <thead>
@@ -413,22 +414,22 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <tr>
 <td>3.1</td>
 <td>Definición de funciones</td>
-<td>1 h</td>
+<td>0,75 h</td>
 </tr>
 <tr>
 <td>3.2</td>
 <td>Parámetros y retorno</td>
-<td>1,5 h</td>
+<td>1,25 h</td>
 </tr>
 <tr>
 <td>3.3</td>
 <td>Ámbito de variables</td>
-<td>1 h</td>
+<td>0,75 h</td>
 </tr>
 <tr>
 <td>3.4</td>
 <td>Módulos y paquetes</td>
-<td>1 h</td>
+<td>0,75 h</td>
 </tr>
 <tr>
 <td>3.5</td>
@@ -1079,12 +1080,43 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <td><code>05_libreria_estandar.py</code></td>
 <td><code>math</code>, <code>random</code>, <code>datetime</code>, <code>pathlib</code> y <code>collections</code></td>
 </tr>
+<tr>
+<td><code>06_mirada_datos.py</code></td>
+<td>Funciones como argumentos para resumir una serie de valores, y <code>statistics</code></td>
+</tr>
 </tbody>
 </table></div>
 <ul>
 <li>Ejercicios del módulo: <a href="modulo_03_ejercicios.html"><code>ejercicios/README.md</code></a></li>
 <li>Práctica 3, librería de validación: <a href="modulo_03_practica.html"><code>ejercicios/PRACTICA_3.md</code></a></li>
 </ul>
+<hr />
+<h2 id="mirada-de-datos">Mirada de datos</h2>
+<p>En el trabajo con datos, las funciones se usan sobre todo de una manera: <strong>como argumento de otra función</strong>, para decirle qué cálculo aplicar. Ya lo has hecho con <code>sorted(..., key=...)</code>. Este resumen recibe los valores y cualquier número de funciones:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rango</span><span class="p">(</span><span class="n">valores</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">valores</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">valores</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">resumen</span><span class="p">(</span><span class="n">valores</span><span class="p">,</span> <span class="o">*</span><span class="n">funciones</span><span class="p">):</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">funcion</span> <span class="ow">in</span> <span class="n">funciones</span><span class="p">:</span>
+        <span class="n">resultado</span><span class="p">[</span><span class="n">funcion</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">funcion</span><span class="p">(</span><span class="n">valores</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">importes</span> <span class="o">=</span> <span class="p">[</span><span class="mf">120.0</span><span class="p">,</span> <span class="mf">80.5</span><span class="p">,</span> <span class="mf">310.0</span><span class="p">,</span> <span class="mf">95.0</span><span class="p">,</span> <span class="mf">150.25</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">resumen</span><span class="p">(</span><span class="n">importes</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">statistics</span><span class="o">.</span><span class="n">median</span><span class="p">,</span> <span class="n">rango</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">'min'</span><span class="p">:</span> <span class="mf">80.5</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">:</span> <span class="mf">310.0</span><span class="p">,</span> <span class="s1">'mean'</span><span class="p">:</span> <span class="mf">151.15</span><span class="p">,</span> <span class="s1">'median'</span><span class="p">:</span> <span class="mf">120.0</span><span class="p">,</span> <span class="s1">'rango'</span><span class="p">:</span> <span class="mf">229.5</span><span class="p">}</span>
+</code></pre></div>
+
+<p>Funciones integradas, de la librería estándar y propias se tratan igual, porque todas son objetos con un atributo <code>__name__</code>. En el Módulo 7 verás exactamente esta forma de trabajar: <code>ventas["importe"].agg(["min", "max", "mean"])</code> y <code>tabla.apply(mi_funcion)</code>.</p>
+<p>Dos cosas más de este módulo que usarás a diario con datos:</p>
+<ul>
+<li><strong><code>statistics</code></strong>, de la librería estándar: <code>mean</code>, <code>median</code>, <code>stdev</code> y <code>quantiles</code> para series pequeñas sin instalar nada.</li>
+<li><strong>Los argumentos por nombre.</strong> Las funciones de las librerías de datos tienen decenas de parámetros opcionales: <code>pd.read_csv(ruta, sep=";", decimal=",", encoding="utf-8")</code>. Se leen y se escriben siempre por nombre.</li>
+</ul>
+<p>El ejemplo completo está en <code>ejemplos/06_mirada_datos.py</code>.</p>
 <hr />
 <h2 id="errores-tipicos-de-quien-viene-de-otro-lenguaje">Errores típicos de quien viene de otro lenguaje</h2>
 <div class="tabla"><table>

@@ -1,15 +1,15 @@
-# Módulo 2. Variables, operadores y estructuras de control (8 horas)
+# Módulo 2. Variables, operadores y estructuras de control (6 horas)
 
 Al terminar este módulo resolverás problemas de programación estructurada en Python idiomático: sabrás cómo se comportan los tipos básicos, qué es realmente una variable y cómo se escriben condicionales y bucles sin arrastrar costumbres de otros lenguajes.
 
 | Unidad | Contenido | Tiempo |
 | --- | --- | --- |
-| 2.1 | Tipos de datos | 1 h |
-| 2.2 | Variables y constantes | 1 h |
-| 2.3 | Operadores | 1 h |
-| 2.4 | Entrada y salida | 1 h |
-| 2.5 | Condicionales | 1 h |
-| 2.6 | Bucles for y while | 1,5 h |
+| 2.1 | Tipos de datos | 0,75 h |
+| 2.2 | Variables y constantes | 0,5 h |
+| 2.3 | Operadores | 0,75 h |
+| 2.4 | Entrada y salida | 0,5 h |
+| 2.5 | Condicionales | 0,75 h |
+| 2.6 | Bucles for y while | 1,25 h |
 | 2.7 | Ejercicios prácticos y práctica 2 | 1,5 h |
 
 ---
@@ -712,9 +712,48 @@ Los ejemplos de la carpeta [`ejemplos/`](ejemplos/) recorren el módulo:
 | `04_entrada_salida.py` | f-strings con formato y validación de entrada |
 | `05_condicionales.py` | `if`, guardas, expresión condicional y `match` |
 | `06_bucles.py` | `for`, `range`, `enumerate`, `while`, `break`, `continue` y `else` |
+| `07_mirada_datos.py` | Valores ausentes, precisión de los flotantes y formato de cifras |
 
 - Ejercicios del módulo: [`ejercicios/README.md`](ejercicios/README.md)
 - Práctica 2, adivina el número y calculadora de nómina: [`ejercicios/PRACTICA_2.md`](ejercicios/PRACTICA_2.md)
+
+---
+
+## Mirada de datos
+
+Lo que has visto en este módulo es también la base del trabajo con datos numéricos. Tres ideas que volverán en el Módulo 7:
+
+**Los valores ausentes existen y hay que decidir qué hacer con ellos.** En Python puro el valor ausente es `None`. En los datos numéricos es `NaN`, un flotante especial que no es igual a nada, ni siquiera a sí mismo:
+
+```python
+>>> nan = float("nan")
+>>> nan == nan
+False
+>>> import math
+>>> math.isnan(nan)
+True
+```
+
+**Los flotantes son aproximados.** Un total calculado con flotantes no se compara con `==`: se usa `math.isclose` o se redondea al presentar. Para dinero exacto existe `decimal.Decimal`.
+
+**Un bucle con acumulador es una agregación.** Este recorrido calcula una media saltando los valores ausentes:
+
+```python
+lecturas = [21.5, 22.1, None, 19.8, None, 23.4]
+
+total = 0.0
+validas = 0
+for lectura in lecturas:
+    if lectura is None:
+        continue
+    total += lectura
+    validas += 1
+
+print(f"Media: {total / validas:.2f}")           # Media: 21.70
+print(f"Válidas: {validas / len(lecturas):.1%}")  # Válidas: 66.7%
+```
+
+Con pandas, en el Módulo 7, las mismas ocho líneas serán `lecturas.mean()` y `lecturas.notna().mean()`. Conviene haberlo escrito a mano una vez para saber qué hace la librería por ti. El ejemplo completo está en `ejemplos/07_mirada_datos.py`.
 
 ---
 

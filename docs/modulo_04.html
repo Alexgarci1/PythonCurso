@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Módulo 4. Colecciones y manejo de datos (8 horas)</title>
+<title>Módulo 4. Colecciones y manejo de datos (6 horas)</title>
 <style>
 :root {
   --fondo: #fbfaf7; --panel: #ffffff; --texto: #1f2328; --suave: #5b6470;
@@ -407,13 +407,14 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </ul>
 </li>
 <li><a href="#49-ejercicios-y-practica-4">4.9 Ejercicios y Práctica 4</a></li>
+<li><a href="#mirada-de-datos">Mirada de datos</a></li>
 <li><a href="#errores-tipicos-de-quien-viene-de-otro-lenguaje">Errores típicos de quien viene de otro lenguaje</a></li>
 <li><a href="#para-saber-mas">Para saber más</a></li>
 </ul>
 </div>
 </aside>
 <main>
-<h1 id="modulo-4-colecciones-y-manejo-de-datos-8-horas">Módulo 4. Colecciones y manejo de datos (8 horas)</h1>
+<h1 id="modulo-4-colecciones-y-manejo-de-datos-6-horas">Módulo 4. Colecciones y manejo de datos (6 horas)</h1>
 <p>Al terminar este módulo sabrás elegir la colección adecuada para cada problema y transformar datos con código conciso: filtrar, agrupar, ordenar y resumir sin escribir bucles innecesarios.</p>
 <div class="tabla"><table>
 <thead>
@@ -427,7 +428,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <tr>
 <td>4.1</td>
 <td>Listas</td>
-<td>1,5 h</td>
+<td>1 h</td>
 </tr>
 <tr>
 <td>4.2</td>
@@ -437,22 +438,22 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <tr>
 <td>4.3</td>
 <td>Diccionarios</td>
-<td>1 h</td>
+<td>0,75 h</td>
 </tr>
 <tr>
 <td>4.4</td>
 <td>Conjuntos</td>
-<td>0,5 h</td>
+<td>0,25 h</td>
 </tr>
 <tr>
 <td>4.5</td>
 <td>Comprensiones</td>
-<td>1 h</td>
+<td>0,75 h</td>
 </tr>
 <tr>
 <td>4.6</td>
 <td>Iteración y funciones integradas</td>
-<td>1 h</td>
+<td>0,75 h</td>
 </tr>
 <tr>
 <td>4.7</td>
@@ -467,7 +468,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <tr>
 <td>4.9</td>
 <td>Ejercicios y Práctica 4</td>
-<td>1,5 h</td>
+<td>1 h</td>
 </tr>
 </tbody>
 </table></div>
@@ -1124,12 +1125,80 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <td><code>08_lista_de_diccionarios.py</code></td>
 <td>Buscar, filtrar, ordenar y agrupar registros</td>
 </tr>
+<tr>
+<td><code>09_mirada_datos.py</code></td>
+<td>La misma tabla por filas y por columnas, y las operaciones de SQL a mano</td>
+</tr>
 </tbody>
 </table></div>
 <ul>
 <li>Ejercicios del módulo: <a href="modulo_04_ejercicios.html"><code>ejercicios/README.md</code></a></li>
 <li>Práctica 4, análisis de ventas: <a href="modulo_04_practica.html"><code>ejercicios/PRACTICA_4.md</code></a></li>
 </ul>
+<hr />
+<h2 id="mirada-de-datos">Mirada de datos</h2>
+<p>Este es el módulo que más se parece al trabajo con datos: la lista de diccionarios de la unidad 4.8 <strong>es una tabla</strong>. Lo que has hecho a mano tiene nombre en SQL y lo tendrá en pandas:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Operación</th>
+<th>SQL</th>
+<th>Python con colecciones</th>
+<th>pandas (Módulo 7)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filtrar</td>
+<td><code>WHERE region = 'Norte'</code></td>
+<td><code>[f for f in filas if f["region"] == "Norte"]</code></td>
+<td><code>tabla[tabla["region"] == "Norte"]</code></td>
+</tr>
+<tr>
+<td>Elegir una columna</td>
+<td><code>SELECT importe</code></td>
+<td><code>[f["importe"] for f in filas]</code></td>
+<td><code>tabla["importe"]</code></td>
+</tr>
+<tr>
+<td>Ordenar</td>
+<td><code>ORDER BY importe DESC</code></td>
+<td><code>sorted(filas, key=lambda f: f["importe"], reverse=True)</code></td>
+<td><code>tabla.sort_values("importe", ascending=False)</code></td>
+</tr>
+<tr>
+<td>Agrupar y sumar</td>
+<td><code>GROUP BY region</code></td>
+<td>Diccionario acumulador</td>
+<td><code>tabla.groupby("region")["importe"].sum()</code></td>
+</tr>
+<tr>
+<td>Valores distintos</td>
+<td><code>SELECT DISTINCT</code></td>
+<td><code>{f["vendedor"] for f in filas}</code></td>
+<td><code>tabla["vendedor"].unique()</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Una misma tabla se puede guardar de dos maneras:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">filas</span> <span class="o">=</span> <span class="p">[</span>                                            <span class="c1"># por filas: lista de diccionarios</span>
+    <span class="p">{</span><span class="s2">"region"</span><span class="p">:</span> <span class="s2">"Norte"</span><span class="p">,</span> <span class="s2">"importe"</span><span class="p">:</span> <span class="mf">1200.0</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"region"</span><span class="p">:</span> <span class="s2">"Sur"</span><span class="p">,</span> <span class="s2">"importe"</span><span class="p">:</span> <span class="mf">800.0</span><span class="p">},</span>
+<span class="p">]</span>
+<span class="n">columnas</span> <span class="o">=</span> <span class="p">{</span>                                         <span class="c1"># por columnas: diccionario de listas</span>
+    <span class="s2">"region"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Norte"</span><span class="p">,</span> <span class="s2">"Sur"</span><span class="p">],</span>
+    <span class="s2">"importe"</span><span class="p">:</span> <span class="p">[</span><span class="mf">1200.0</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">],</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Pasar de una a otra es una comprensión:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">columnas</span> <span class="o">=</span> <span class="p">{</span><span class="n">clave</span><span class="p">:</span> <span class="p">[</span><span class="n">fila</span><span class="p">[</span><span class="n">clave</span><span class="p">]</span> <span class="k">for</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">filas</span><span class="p">]</span> <span class="k">for</span> <span class="n">clave</span> <span class="ow">in</span> <span class="n">filas</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">(</span><span class="n">columnas</span><span class="p">[</span><span class="s2">"importe"</span><span class="p">])</span>
+<span class="mf">2000.0</span>
+</code></pre></div>
+
+<p>La forma por filas es la natural cuando se procesa un registro cada vez: una petición, una línea de un CSV, un objeto. La forma por columnas es la que usan NumPy y pandas, porque permite operar con la columna entera de una vez y guardar cada columna con un único tipo. Ese cambio, de pensar en filas a pensar en columnas, es el centro del Módulo 7.</p>
+<p>El ejemplo completo está en <code>ejemplos/09_mirada_datos.py</code>.</p>
 <hr />
 <h2 id="errores-tipicos-de-quien-viene-de-otro-lenguaje">Errores típicos de quien viene de otro lenguaje</h2>
 <div class="tabla"><table>

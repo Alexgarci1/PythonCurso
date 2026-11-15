@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-import m7_proyecto_app as app
+import m8_proyecto_app as app
 from incidencias import almacen, excepciones, gestor as modulo_gestor, informes, modelos
 from incidencias.excepciones import (
     DatosNoValidos,

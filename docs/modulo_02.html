@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Módulo 2. Variables, operadores y estructuras de control (8 horas)</title>
+<title>Módulo 2. Variables, operadores y estructuras de control (6 horas)</title>
 <style>
 :root {
   --fondo: #fbfaf7; --panel: #ffffff; --texto: #1f2328; --suave: #5b6470;
@@ -400,13 +400,14 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </ul>
 </li>
 <li><a href="#27-ejercicios-practicos">2.7 Ejercicios prácticos</a></li>
+<li><a href="#mirada-de-datos">Mirada de datos</a></li>
 <li><a href="#errores-tipicos-de-quien-viene-de-otro-lenguaje">Errores típicos de quien viene de otro lenguaje</a></li>
 <li><a href="#para-saber-mas">Para saber más</a></li>
 </ul>
 </div>
 </aside>
 <main>
-<h1 id="modulo-2-variables-operadores-y-estructuras-de-control-8-horas">Módulo 2. Variables, operadores y estructuras de control (8 horas)</h1>
+<h1 id="modulo-2-variables-operadores-y-estructuras-de-control-6-horas">Módulo 2. Variables, operadores y estructuras de control (6 horas)</h1>
 <p>Al terminar este módulo resolverás problemas de programación estructurada en Python idiomático: sabrás cómo se comportan los tipos básicos, qué es realmente una variable y cómo se escriben condicionales y bucles sin arrastrar costumbres de otros lenguajes.</p>
 <div class="tabla"><table>
 <thead>
@@ -420,32 +421,32 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <tr>
 <td>2.1</td>
 <td>Tipos de datos</td>
-<td>1 h</td>
+<td>0,75 h</td>
 </tr>
 <tr>
 <td>2.2</td>
 <td>Variables y constantes</td>
-<td>1 h</td>
+<td>0,5 h</td>
 </tr>
 <tr>
 <td>2.3</td>
 <td>Operadores</td>
-<td>1 h</td>
+<td>0,75 h</td>
 </tr>
 <tr>
 <td>2.4</td>
 <td>Entrada y salida</td>
-<td>1 h</td>
+<td>0,5 h</td>
 </tr>
 <tr>
 <td>2.5</td>
 <td>Condicionales</td>
-<td>1 h</td>
+<td>0,75 h</td>
 </tr>
 <tr>
 <td>2.6</td>
 <td>Bucles for y while</td>
-<td>1,5 h</td>
+<td>1,25 h</td>
 </tr>
 <tr>
 <td>2.7</td>
@@ -1197,12 +1198,45 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <td><code>06_bucles.py</code></td>
 <td><code>for</code>, <code>range</code>, <code>enumerate</code>, <code>while</code>, <code>break</code>, <code>continue</code> y <code>else</code></td>
 </tr>
+<tr>
+<td><code>07_mirada_datos.py</code></td>
+<td>Valores ausentes, precisión de los flotantes y formato de cifras</td>
+</tr>
 </tbody>
 </table></div>
 <ul>
 <li>Ejercicios del módulo: <a href="modulo_02_ejercicios.html"><code>ejercicios/README.md</code></a></li>
 <li>Práctica 2, adivina el número y calculadora de nómina: <a href="modulo_02_practica.html"><code>ejercicios/PRACTICA_2.md</code></a></li>
 </ul>
+<hr />
+<h2 id="mirada-de-datos">Mirada de datos</h2>
+<p>Lo que has visto en este módulo es también la base del trabajo con datos numéricos. Tres ideas que volverán en el Módulo 7:</p>
+<p><strong>Los valores ausentes existen y hay que decidir qué hacer con ellos.</strong> En Python puro el valor ausente es <code>None</code>. En los datos numéricos es <code>NaN</code>, un flotante especial que no es igual a nada, ni siquiera a sí mismo:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">nan</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">nan</span> <span class="o">==</span> <span class="n">nan</span>
+<span class="kc">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">nan</span><span class="p">)</span>
+<span class="kc">True</span>
+</code></pre></div>
+
+<p><strong>Los flotantes son aproximados.</strong> Un total calculado con flotantes no se compara con <code>==</code>: se usa <code>math.isclose</code> o se redondea al presentar. Para dinero exacto existe <code>decimal.Decimal</code>.</p>
+<p><strong>Un bucle con acumulador es una agregación.</strong> Este recorrido calcula una media saltando los valores ausentes:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">lecturas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">21.5</span><span class="p">,</span> <span class="mf">22.1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mf">19.8</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mf">23.4</span><span class="p">]</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">validas</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">lectura</span> <span class="ow">in</span> <span class="n">lecturas</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">lectura</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">lectura</span>
+    <span class="n">validas</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Media: </span><span class="si">{</span><span class="n">total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">validas</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>           <span class="c1"># Media: 21.70</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Válidas: </span><span class="si">{</span><span class="n">validas</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">lecturas</span><span class="p">)</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># Válidas: 66.7%</span>
+</code></pre></div>
+
+<p>Con pandas, en el Módulo 7, las mismas ocho líneas serán <code>lecturas.mean()</code> y <code>lecturas.notna().mean()</code>. Conviene haberlo escrito a mano una vez para saber qué hace la librería por ti. El ejemplo completo está en <code>ejemplos/07_mirada_datos.py</code>.</p>
 <hr />
 <h2 id="errores-tipicos-de-quien-viene-de-otro-lenguaje">Errores típicos de quien viene de otro lenguaje</h2>
 <div class="tabla"><table>

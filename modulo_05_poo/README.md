@@ -1,15 +1,15 @@
-# Módulo 5. Programación Orientada a Objetos (8 horas)
+# Módulo 5. Programación Orientada a Objetos (6 horas)
 
 Al terminar este módulo sabrás modelar un dominio con clases de Python y aplicar las convenciones del lenguaje, que en varios puntos son distintas de las de Java y C#.
 
 | Unidad | Contenido | Tiempo |
 | --- | --- | --- |
-| 5.1 | Clases y objetos | 1 h |
+| 5.1 | Clases y objetos | 0,5 h |
 | 5.2 | Constructores: `__init__` y `self` | 0,5 h |
-| 5.3 | Atributos y métodos | 1,5 h |
-| 5.4 | Herencia | 1,5 h |
-| 5.5 | Polimorfismo y duck typing | 1 h |
-| 5.6 | Encapsulación | 1 h |
+| 5.3 | Atributos y métodos | 1 h |
+| 5.4 | Herencia | 1 h |
+| 5.5 | Polimorfismo y duck typing | 0,75 h |
+| 5.6 | Encapsulación | 0,75 h |
 | 5.7 | Buenas prácticas y Práctica 5 | 1,5 h |
 
 ## Lo que cambia respecto a Java y C#
@@ -685,9 +685,55 @@ Los ejemplos de la carpeta [`ejemplos/`](ejemplos/) recorren el módulo:
 | `04_polimorfismo.py` | Polimorfismo por herencia, duck typing y `Protocol` |
 | `05_encapsulacion.py` | Convenciones de nombres y `@property` |
 | `06_dataclasses_y_composicion.py` | `@dataclass`, `field`, `frozen` y composición |
+| `07_mirada_datos.py` | De objetos a filas con `asdict`, y una tabla mínima con métodos especiales |
 
 - Ejercicios del módulo: [`ejercicios/README.md`](ejercicios/README.md)
 - Práctica 5, modelo de una biblioteca: [`ejercicios/PRACTICA_5.md`](ejercicios/PRACTICA_5.md)
+
+---
+
+## Mirada de datos
+
+### Objetos para las reglas, tablas para el análisis
+
+Una clase garantiza que **cada** dato es válido y sabe comportarse: una `Venta` no puede tener unidades negativas y sabe calcular su importe. Una tabla responde preguntas sobre **todos** los datos a la vez: cuánto se vendió por región. Las aplicaciones reales usan las dos cosas, y el puente entre ellas es corto:
+
+```python
+from dataclasses import asdict, dataclass
+
+@dataclass(frozen=True)
+class Venta:
+    region: str
+    unidades: int
+    precio: float
+
+    @property
+    def importe(self) -> float:
+        return round(self.unidades * self.precio, 2)
+```
+
+```python
+>>> ventas = [Venta("Norte", 3, 19.9), Venta("Sur", 1, 250.0)]
+>>> [asdict(venta) | {"importe": venta.importe} for venta in ventas]
+[{'region': 'Norte', 'unidades': 3, 'precio': 19.9, 'importe': 59.7}, {'region': 'Sur', 'unidades': 1, 'precio': 250.0, 'importe': 250.0}]
+```
+
+Esa lista de diccionarios es justo lo que acepta `pd.DataFrame(...)`. En el proyecto del Módulo 8 harás este recorrido completo: objetos `Incidencia` con sus reglas y un módulo de análisis que los convierte en tabla.
+
+### La sintaxis de pandas no es magia
+
+Cuando en el Módulo 7 escribas `len(tabla)`, `tabla["importe"]`, `tabla.shape` o `tabla_a + tabla_b`, estarás usando lo que has aprendido aquí:
+
+| Lo que escribes | Lo que hay detrás |
+| --- | --- |
+| `len(tabla)` | `__len__` |
+| `tabla["importe"]` | `__getitem__` |
+| `tabla.shape`, `tabla.columns` | Propiedades |
+| `serie * 1.21`, `serie > 100` | `__mul__`, `__gt__` |
+| `tabla` en el intérprete | `__repr__` |
+| `pd.DataFrame.from_records(...)` | Un `@classmethod` como constructor alternativo |
+
+Un `DataFrame` es un objeto con atributos, métodos y métodos especiales. El ejemplo `ejemplos/07_mirada_datos.py` construye una tabla mínima con cuatro de ellos.
 
 ---
 

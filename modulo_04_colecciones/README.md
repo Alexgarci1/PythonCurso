@@ -1,18 +1,18 @@
-# Módulo 4. Colecciones y manejo de datos (8 horas)
+# Módulo 4. Colecciones y manejo de datos (6 horas)
 
 Al terminar este módulo sabrás elegir la colección adecuada para cada problema y transformar datos con código conciso: filtrar, agrupar, ordenar y resumir sin escribir bucles innecesarios.
 
 | Unidad | Contenido | Tiempo |
 | --- | --- | --- |
-| 4.1 | Listas | 1,5 h |
+| 4.1 | Listas | 1 h |
 | 4.2 | Tuplas | 0,5 h |
-| 4.3 | Diccionarios | 1 h |
-| 4.4 | Conjuntos | 0,5 h |
-| 4.5 | Comprensiones | 1 h |
-| 4.6 | Iteración y funciones integradas | 1 h |
+| 4.3 | Diccionarios | 0,75 h |
+| 4.4 | Conjuntos | 0,25 h |
+| 4.5 | Comprensiones | 0,75 h |
+| 4.6 | Iteración y funciones integradas | 0,75 h |
 | 4.7 | Manipulación de cadenas | 0,5 h |
 | 4.8 | Búsqueda, filtrado y ordenación | 0,5 h |
-| 4.9 | Ejercicios y Práctica 4 | 1,5 h |
+| 4.9 | Ejercicios y Práctica 4 | 1 h |
 
 ## Qué colección usar
 
@@ -723,9 +723,49 @@ Los ejemplos de la carpeta [`ejemplos/`](ejemplos/) recorren el módulo:
 | `06_iteracion.py` | `enumerate`, `zip`, funciones de resumen y `sorted` con `key` |
 | `07_cadenas.py` | `split`, `join`, limpieza y formato de informes |
 | `08_lista_de_diccionarios.py` | Buscar, filtrar, ordenar y agrupar registros |
+| `09_mirada_datos.py` | La misma tabla por filas y por columnas, y las operaciones de SQL a mano |
 
 - Ejercicios del módulo: [`ejercicios/README.md`](ejercicios/README.md)
 - Práctica 4, análisis de ventas: [`ejercicios/PRACTICA_4.md`](ejercicios/PRACTICA_4.md)
+
+---
+
+## Mirada de datos
+
+Este es el módulo que más se parece al trabajo con datos: la lista de diccionarios de la unidad 4.8 **es una tabla**. Lo que has hecho a mano tiene nombre en SQL y lo tendrá en pandas:
+
+| Operación | SQL | Python con colecciones | pandas (Módulo 7) |
+| --- | --- | --- | --- |
+| Filtrar | `WHERE region = 'Norte'` | `[f for f in filas if f["region"] == "Norte"]` | `tabla[tabla["region"] == "Norte"]` |
+| Elegir una columna | `SELECT importe` | `[f["importe"] for f in filas]` | `tabla["importe"]` |
+| Ordenar | `ORDER BY importe DESC` | `sorted(filas, key=lambda f: f["importe"], reverse=True)` | `tabla.sort_values("importe", ascending=False)` |
+| Agrupar y sumar | `GROUP BY region` | Diccionario acumulador | `tabla.groupby("region")["importe"].sum()` |
+| Valores distintos | `SELECT DISTINCT` | `{f["vendedor"] for f in filas}` | `tabla["vendedor"].unique()` |
+
+Una misma tabla se puede guardar de dos maneras:
+
+```python
+filas = [                                            # por filas: lista de diccionarios
+    {"region": "Norte", "importe": 1200.0},
+    {"region": "Sur", "importe": 800.0},
+]
+columnas = {                                         # por columnas: diccionario de listas
+    "region": ["Norte", "Sur"],
+    "importe": [1200.0, 800.0],
+}
+```
+
+Pasar de una a otra es una comprensión:
+
+```python
+>>> columnas = {clave: [fila[clave] for fila in filas] for clave in filas[0]}
+>>> sum(columnas["importe"])
+2000.0
+```
+
+La forma por filas es la natural cuando se procesa un registro cada vez: una petición, una línea de un CSV, un objeto. La forma por columnas es la que usan NumPy y pandas, porque permite operar con la columna entera de una vez y guardar cada columna con un único tipo. Ese cambio, de pensar en filas a pensar en columnas, es el centro del Módulo 7.
+
+El ejemplo completo está en `ejemplos/09_mirada_datos.py`.
 
 ---
 

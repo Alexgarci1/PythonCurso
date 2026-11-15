@@ -1,10 +1,10 @@
-"""Módulo 7 - Proyecto final: aplicación de consola del gestor de incidencias.
+"""Módulo 8 - Proyecto final: aplicación de consola del gestor de incidencias.
 
 Este fichero es la única parte del proyecto que habla con el usuario: usa
 ``input`` y ``print``, captura los errores de la aplicación y decide cuándo
 se guarda. Toda la lógica está en el paquete ``incidencias``.
 
-Uso: python m7_proyecto_app.py [fichero.csv]
+Uso: python m8_proyecto_app.py [fichero.csv]
 """
 
 import logging

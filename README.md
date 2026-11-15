@@ -4,6 +4,8 @@ Repositorio de trabajo del curso. Aquí están los apuntes, los ejemplos que se 
 
 Los contenidos también están en HTML: abre [`docs/index.html`](docs/index.html) en el navegador.
 
+Y en forma de presentación interactiva, una diapositiva por pantalla: abre [`docs/presentacion/index.html`](docs/presentacion/index.html). Se avanza con las flechas o la barra espaciadora; `M` abre el índice, `Esc` la vista general y `F` la pantalla completa. En los ejemplos del intérprete los resultados están ocultos: intenta predecirlos y haz clic para comprobarlos.
+
 ## Puesta en marcha
 
 Necesitas Python 3.12 o superior, Visual Studio Code y Git.

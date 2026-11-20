@@ -7,7 +7,7 @@ DESCUENTO = 0
 IVA_GENERAL = 21
 
 
-def precio_final(precio, iva=IVA_GENERAL, descuento=0):
+def precio_final(precio, iva=IVA_GENERAL, descuento=DESCUENTO):
     """Calcula el precio con IVA después de aplicar el descuento."""
     subtotal = precio - precio * descuento / 100
     total = subtotal + subtotal * iva / 100

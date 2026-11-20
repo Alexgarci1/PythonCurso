@@ -122,6 +122,7 @@ def test_ej2_reparto():
         (10, "Sobresaliente"),
         (-0.1, "Nota no válida"),
         (10.1, "Nota no válida"),
+        (float("nan"), "Nota no válida"),
     ],
 )
 def test_ej3_calificacion(nota, esperado):
@@ -191,6 +192,7 @@ def test_ej3_mayor_de_tres(numeros, esperado):
         ((1, 1, 5), "no es un triángulo"),
         ((0, 4, 5), "no es un triángulo"),
         ((-3, 4, 5), "no es un triángulo"),
+        ((float("nan"), 2, 3), "no es un triángulo"),
     ],
 )
 def test_ej3_tipo_triangulo(lados, esperado):

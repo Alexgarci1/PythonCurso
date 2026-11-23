@@ -76,6 +76,38 @@ def test_es_dni_no_valido(dni):
     assert texto.es_dni(dni) is False
 
 
+@pytest.mark.parametrize(
+    "telefono",
+    ["612345678", "612 345 678", "61234 5678", "  712 345 678  ", "900000000", "987654321"],
+)
+def test_es_telefono_valido(telefono):
+    assert texto.es_telefono(telefono) is True
+
+
+@pytest.mark.parametrize(
+    "telefono",
+    ["512345678", "61234567", "6123456789", "612 34A 678", "", "abcdefghi"],
+)
+def test_es_telefono_no_valido(telefono):
+    assert texto.es_telefono(telefono) is False
+
+
+@pytest.mark.parametrize(
+    "iban",
+    ["ES9121000418450200051332", " ES91 2100 0418 4502 0005 1332 ", "es9121000418450200051332"],
+)
+def test_es_iban_valido(iban):
+    assert texto.es_iban(iban) is True
+
+
+@pytest.mark.parametrize(
+    "iban",
+    ["ES9121000418450200051333", "ES91210004184502000513", "FR9121000418450200051332", "ABCDEFGHIJKLMN"],
+)
+def test_es_iban_no_valido(iban):
+    assert texto.es_iban(iban) is False
+
+
 # ------------------------------------------------------------------ numeros.py
 @pytest.mark.parametrize("valor", ["42", " 42 ", "-42", "+7", "0", "007"])
 def test_es_entero_valido(valor):
@@ -189,7 +221,9 @@ FUNCIONES = [
     "es_email",
     "es_entero",
     "es_fecha",
+    "es_iban",
     "es_mayor_de_edad",
+    "es_telefono",
     "esta_vacio",
     "normalizar_nombre",
 ]
@@ -254,6 +288,28 @@ def test_validar_registro_respeta_hoy():
     assert registro.validar_registro(*datos, hoy=date(2026, 11, 24)) == []
 
 
+def test_validar_registro_telefono_e_iban():
+    assert registro.validar_registro(
+        "Ada",
+        "ada@ejemplo.com",
+        "12345678Z",
+        "1990-01-01",
+        hoy=HOY,
+        telefono="612 345 678",
+        iban="ES9121000418450200051332",
+    ) == []
+
+    assert registro.validar_registro(
+        "Ada",
+        "ada@ejemplo.com",
+        "12345678Z",
+        "1990-01-01",
+        hoy=HOY,
+        telefono="512345678",
+        iban="ES9121000418450200051333",
+    ) == ["El teléfono no es válido.", "El IBAN no es válido."]
+
+
 def test_crear_ficha():
     ficha = registro.crear_ficha(" ada LOVELACE", "Ada@Ejemplo.com ", " 12345678z", " 1990-01-01 ")
     assert ficha == {
@@ -262,6 +318,19 @@ def test_crear_ficha():
         "dni": "12345678Z",
         "nacimiento": "1990-01-01",
     }
+
+
+def test_crear_ficha_con_telefono_e_iban():
+    ficha = registro.crear_ficha(
+        "Ada",
+        "ada@ejemplo.com",
+        "12345678z",
+        "1990-01-01",
+        telefono="612 345 678",
+        iban=" es91 2100 0418 4502 0005 1332 ",
+    )
+    assert ficha["telefono"] == "612345678"
+    assert ficha["iban"] == "ES9121000418450200051332"
 
 
 def test_registro_usa_el_paquete():
@@ -298,3 +367,14 @@ def test_main_con_errores(monkeypatch, capsys):
     assert " - El correo no es válido." in salida
     assert "DNI" not in salida.split("alta:")[1]
     assert "Alta correcta" not in salida
+
+
+def test_main_vuelve_a_pedir_solo_datos_errores(monkeypatch, capsys):
+    salida = _ejecutar_main(
+        monkeypatch,
+        capsys,
+        ["", "ada@ejemplo", "12345678Z", "1990-01-01", "Ada Lovelace", "ada@ejemplo.com"],
+    )
+    assert "Alta correcta:" in salida
+    assert "nombre: Ada Lovelace" in salida
+    assert "email: ada@ejemplo.com" in salida

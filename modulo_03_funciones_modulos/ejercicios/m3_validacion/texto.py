@@ -11,7 +11,7 @@ def esta_vacio(texto: str | None) -> bool:
     >>> esta_vacio(" a ")
     False
     """
-    raise NotImplementedError
+    return texto is None or texto.strip() == ""
 
 
 def normalizar_nombre(nombre: str) -> str:
@@ -20,7 +20,7 @@ def normalizar_nombre(nombre: str) -> str:
     >>> normalizar_nombre("  ada   LOVELACE ")
     'Ada Lovelace'
     """
-    raise NotImplementedError
+    return " ".join(palabra.capitalize() for palabra in nombre.split())
 
 
 def es_email(texto: str) -> bool:
@@ -35,7 +35,11 @@ def es_email(texto: str) -> bool:
     >>> es_email("ada@ejemplo")
     False
     """
-    raise NotImplementedError
+    if " " in texto or texto.count("@") != 1:
+        return False
+
+    antes, dominio = texto.split("@")
+    return bool(antes) and "." in dominio and not dominio.startswith(".") and not dominio.endswith(".")
 
 
 def es_dni(texto: str) -> bool:
@@ -50,4 +54,37 @@ def es_dni(texto: str) -> bool:
     >>> es_dni("12345678A")
     False
     """
-    raise NotImplementedError
+    texto = texto.strip()
+    if len(texto) != 9 or not texto[:8].isdigit() or not texto[8].isalpha():
+        return False
+
+    numero = int(texto[:8])
+    return texto[8].upper() == LETRAS_DNI[numero % 23]
+
+
+def es_telefono(texto: str) -> bool:
+    """Comprueba un teléfono español de nueve dígitos."""
+    if texto is None:
+        return False
+
+    numero = texto.strip().replace(" ", "")
+    return (
+        len(numero) == 9
+        and numero.isdigit()
+        and numero[0] in "6789"
+    )
+
+
+def es_iban(texto: str) -> bool:
+    """Comprueba la estructura y los dígitos de control de un IBAN español."""
+    if texto is None:
+        return False
+
+    iban = texto.strip().upper().replace(" ", "")
+    if len(iban) != 24 or not iban.startswith("ES") or not iban[2:].isdigit():
+        return False
+
+    reorganizado = iban[4:] + iban[:4]
+    convertido = "".join(str(ord(letra) - 55) if letra.isalpha() else letra
+                         for letra in reorganizado)
+    return int(convertido) % 97 == 1

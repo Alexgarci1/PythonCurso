@@ -14,7 +14,8 @@ def es_palindromo(texto: str) -> bool:
     >>> es_palindromo("Python")
     False
     """
-    raise NotImplementedError
+    limpio = "".join(caracter.lower() for caracter in texto if caracter.isalnum())
+    return limpio == limpio[::-1]
 
 
 def contar_vocales(texto: str) -> int:
@@ -23,7 +24,7 @@ def contar_vocales(texto: str) -> int:
     >>> contar_vocales("Programación")
     5
     """
-    raise NotImplementedError
+    return sum(caracter.lower() in VOCALES for caracter in texto)
 
 
 def invertir_palabras(frase: str) -> str:
@@ -32,7 +33,7 @@ def invertir_palabras(frase: str) -> str:
     >>> invertir_palabras("  hola   mundo cruel ")
     'cruel mundo hola'
     """
-    raise NotImplementedError
+    return " ".join(frase.split()[::-1])
 
 
 def a_snake_case(texto: str) -> str:
@@ -43,7 +44,8 @@ def a_snake_case(texto: str) -> str:
     >>> a_snake_case("  codigo-postal ")
     'codigo_postal'
     """
-    raise NotImplementedError
+    normalizado = texto.strip().replace("-", " ")
+    return "_".join(normalizado.lower().split())
 
 
 def enmascarar(numero: str, visibles: int = 4) -> str:
@@ -56,8 +58,11 @@ def enmascarar(numero: str, visibles: int = 4) -> str:
     >>> enmascarar("123")
     '123'
     """
-    raise NotImplementedError
-    # Cuidado con numero[-visibles:]: si visibles es 0, numero[-0:] es la cadena entera
+    if len(numero) <= visibles:
+        return numero
+    if visibles == 0:
+        return "*" * len(numero)
+    return "*" * (len(numero) - visibles) + numero[-visibles:]
 
 
 def son_anagramas(a: str, b: str) -> bool:
@@ -68,7 +73,9 @@ def son_anagramas(a: str, b: str) -> bool:
     >>> son_anagramas("Roma", "amor")
     True
     """
-    raise NotImplementedError
+    limpiar_a = "".join(caracter.lower() for caracter in a if not caracter.isspace())
+    limpiar_b = "".join(caracter.lower() for caracter in b if not caracter.isspace())
+    return sorted(limpiar_a) == sorted(limpiar_b)
 
 
 def parsear_configuracion(texto: str) -> dict[str, str]:
@@ -81,7 +88,15 @@ def parsear_configuracion(texto: str) -> dict[str, str]:
     >>> parsear_configuracion("host = localhost; puerto=8080;; modo=debug")
     {'host': 'localhost', 'puerto': '8080', 'modo': 'debug'}
     """
-    raise NotImplementedError
+    resultado = {}
+    for fragmento in texto.split(";"):
+        if "=" not in fragmento:
+            continue
+        clave, valor = fragmento.split("=", 1)
+        clave = clave.strip()
+        if clave:
+            resultado[clave] = valor.strip()
+    return resultado
 
 
 def formatear_tabla(filas: list[tuple[str, float]]) -> str:
@@ -95,4 +110,4 @@ def formatear_tabla(filas: list[tuple[str, float]]) -> str:
     teclado          45.00
     monitor         189.50
     """
-    raise NotImplementedError
+    return "\n".join(f"{nombre:<12}{importe:>10.2f}" for nombre, importe in filas)

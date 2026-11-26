@@ -24,7 +24,11 @@ RUTA = Path(__file__).parent.parent / "datos" / "ventas.csv"
 
 def leer_ventas(ruta):
     with open(ruta, encoding="utf-8", newline="") as fichero:
-        return list(csv.DictReader(fichero))
+        ventas = list(csv.DictReader(fichero))
+    for venta in ventas:
+        venta["unidades"] = int(venta["unidades"])
+        venta["precio"] = float(venta["precio"])
+    return ventas
 
 
 def importe(venta):
@@ -33,7 +37,7 @@ def importe(venta):
 
 def total(ventas):
     suma = 0
-    for venta in ventas[1:]:
+    for venta in ventas:
         suma += importe(venta)
     return suma
 
@@ -41,7 +45,8 @@ def total(ventas):
 def mejor_vendedor(ventas):
     por_vendedor = {}
     for venta in ventas:
-        por_vendedor[venta["vendedor"]] = importe(venta)
+        nombre = venta["vendedor"]
+        por_vendedor[nombre] = por_vendedor.get(nombre, 0) + importe(venta)
     nombre = max(por_vendedor, key=por_vendedor.get)
     return nombre, por_vendedor[nombre]
 

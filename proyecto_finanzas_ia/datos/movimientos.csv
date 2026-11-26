@@ -1,0 +1,53 @@
+fecha,concepto,importe,tipo
+2026-09-01,Nomina Empresa Tech,2150.00,ingreso
+2026-09-02,Alquiler Piso Madrid,850.00,gasto
+2026-09-03,Supermercado Mercadona,72.40,gasto
+2026-09-04,Abono Transporte Metro,54.60,gasto
+2026-09-05,Suscripcion Netflix,12.99,gasto
+2026-09-07,Cafe y Tostadas,4.50,gasto
+2026-09-09,Cena Restaurante Italiano,38.00,gasto
+2026-09-11,Supermercado Carrefour,65.20,gasto
+2026-09-14,Suscripcion Spotify,10.99,gasto
+2026-09-15,Gasolina Repsol,52.00,gasto
+2026-09-18,Farmacia Crema,14.80,gasto
+2026-09-20,Supermercado Lidl,58.90,gasto
+2026-09-22,Entradas Concierto,65.00,gasto
+2026-09-25,Factura Luz Iberdrola,61.40,gasto
+2026-09-27,Gimnasio Mensual,39.90,gasto
+2026-09-29,Supermercado Mercadona,54.10,gasto
+2026-10-01,Nomina Empresa Tech,2150.00,ingreso
+2026-10-02,Alquiler Piso Madrid,850.00,gasto
+2026-10-03,Supermercado Mercadona,64.50,gasto
+2026-10-04,Abono Transporte Metro,54.60,gasto
+2026-10-05,Suscripcion Netflix,12.99,gasto
+2026-10-06,Cafe y Desayuno,4.20,gasto
+2026-10-08,Cena Restaurante Centro,42.00,gasto
+2026-10-10,Supermercado Carrefour,78.30,gasto
+2026-10-12,Gasolina Repsol,55.00,gasto
+2026-10-14,Suscripcion Spotify,10.99,gasto
+2026-10-15,Clase Particular Python,120.00,ingreso
+2026-10-16,Compra Amazon Electronica,289.90,gasto
+2026-10-18,Farmacia,18.40,gasto
+2026-10-20,Supermercado Lidl,52.10,gasto
+2026-10-22,Reparacion Averia Coche,490.00,gasto
+2026-10-24,Cine y Palomitas,21.50,gasto
+2026-10-26,Factura Luz Iberdrola,68.20,gasto
+2026-10-28,Gimnasio Mensual,39.90,gasto
+2026-10-29,Cena Amigos,36.80,gasto
+2026-10-30,Supermercado Mercadona,61.20,gasto
+2026-11-01,Nomina Empresa Tech,2150.00,ingreso
+2026-11-02,Alquiler Piso Madrid,850.00,gasto
+2026-11-03,Supermercado Mercadona,68.90,gasto
+2026-11-04,Abono Transporte Metro,54.60,gasto
+2026-11-05,Suscripcion Netflix,12.99,gasto
+2026-11-07,Desayuno Cafeteria,5.10,gasto
+2026-11-09,Supermercado Lidl,49.80,gasto
+2026-11-11,Compra Amazon Ropa,74.50,gasto
+2026-11-14,Suscripcion Spotify,10.99,gasto
+2026-11-15,Venta Wallapop Monitor,140.00,ingreso
+2026-11-16,Gasolina Repsol,58.00,gasto
+2026-11-18,Cena Tapas,29.50,gasto
+2026-11-20,Supermercado Carrefour,71.20,gasto
+2026-11-22,Factura Luz Iberdrola,74.60,gasto
+2026-11-23,Farmacia Vitaminas,22.30,gasto
+2026-11-24,Gimnasio Mensual,39.90,gasto
